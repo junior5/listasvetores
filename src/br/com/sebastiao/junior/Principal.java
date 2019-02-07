@@ -2,6 +2,7 @@ package br.com.sebastiao.junior;
 
 import java.util.Scanner;
 
+import br.com.sebastiao.junior.enuns.EResultado;
 import br.com.sebastiao.junior.exception.NumeroForaIntervaloException;
 import br.com.sebastiao.junior.exception.NumeroNaoMultiploExcpetion;
 import br.com.sebastiao.junior.exception.OpcaoResultadoInvalidaException;
@@ -32,8 +33,8 @@ public class Principal {
 			opcaoResultado = scanner.next();
 			
 			if (opcaoResultado == null 
-					|| !opcaoResultado.equalsIgnoreCase("pares") 
-					&& !opcaoResultado.equalsIgnoreCase("impares")) {
+					|| !opcaoResultado.equalsIgnoreCase(EResultado.PARES.name()) 
+					&& !opcaoResultado.equalsIgnoreCase(EResultado.IMPARES.name())) {
 				throw new OpcaoResultadoInvalidaException("Opção de resultado inválida!");
 			}
 		}
@@ -45,6 +46,6 @@ public class Principal {
 					: calculadora.calcular(new NumeroNaoMultiploDeTres(indice, valor));
 		}
 		
-		System.out.println("\nTotal: "+ calculadora.somatorio(vetor, opcaoResultado.equalsIgnoreCase("pares")));
+		System.out.println("\nTotal: "+ calculadora.somatorio(vetor, opcaoResultado.equalsIgnoreCase(EResultado.PARES.name())));
 	}
 }
