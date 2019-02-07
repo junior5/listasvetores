@@ -1,5 +1,6 @@
 package br.com.sebastiao.junior;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import br.com.sebastiao.junior.enuns.EResultado;
@@ -18,7 +19,11 @@ public class Principal {
 		try(Scanner scanner = new Scanner(System.in)){
 			System.out.print("Informe um valor de 100 até 1000 que seja multiplo de 10 (Dez): ");
 			
-			valor = scanner.nextInt();
+			try {
+				valor = scanner.nextInt();
+			} catch (InputMismatchException e) {
+				throw new InputMismatchException("O valor informado é inválido!");
+			}
 
 			if (valor == null || valor < 100 || valor > 1000) {
 				throw new NumeroForaIntervaloException("Valor informado está fora do intervalo aceito (100 até 1000)!");
