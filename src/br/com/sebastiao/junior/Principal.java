@@ -4,9 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import br.com.sebastiao.junior.enuns.EResultado;
-import br.com.sebastiao.junior.exception.NumeroForaIntervaloException;
-import br.com.sebastiao.junior.exception.NumeroNaoMultiploExcpetion;
-import br.com.sebastiao.junior.exception.OpcaoResultadoInvalidaException;
+import br.com.sebastiao.junior.exception.ValidationException;
 
 public class Principal {
 
@@ -17,20 +15,21 @@ public class Principal {
 		CalculadoraDeMultiplos calculadora = new CalculadoraDeMultiplos();
 		
 		try(Scanner scanner = new Scanner(System.in)){
+			
 			System.out.print("Informe um valor de 100 até 1000 que seja multiplo de 10 (Dez): ");
 			
 			try {
 				valor = scanner.nextInt();
 			} catch (InputMismatchException e) {
-				throw new InputMismatchException("O valor informado é inválido!");
+				throw new ValidationException("O valor informado é inválido!");
 			}
 
 			if (valor == null || valor < 100 || valor > 1000) {
-				throw new NumeroForaIntervaloException("Valor informado está fora do intervalo aceito (100 até 1000)!");
+				throw new ValidationException("Valor informado está fora do intervalo aceito (100 até 1000)!");
 			}
 			
 			if (!calculadora.isMultiplo(valor, 10)) {
-				throw new NumeroNaoMultiploExcpetion("O valor informado não é multiplo de 10 (Dez)!");
+				throw new ValidationException("O valor informado não é multiplo de 10 (Dez)!");
 			}
 			
 			System.out.print("\nDeseja somar as posições pares ou impares? ");
@@ -40,7 +39,7 @@ public class Principal {
 			if (opcaoResultado == null 
 					|| !opcaoResultado.equalsIgnoreCase(EResultado.PARES.name()) 
 					&& !opcaoResultado.equalsIgnoreCase(EResultado.IMPARES.name())) {
-				throw new OpcaoResultadoInvalidaException("Opção de resultado inválida!");
+				throw new ValidationException("Opção de resultado inválida!");
 			}
 		}
 		
